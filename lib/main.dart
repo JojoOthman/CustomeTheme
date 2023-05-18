@@ -1,10 +1,14 @@
 import 'package:custom_theme/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'home_page.dart';
 
-void main() {
+
+late SharedPreferences sharedPref ;
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  sharedPref = await SharedPreferences.getInstance();
   runApp(const MyApp());
 }
 
@@ -17,7 +21,7 @@ class MyApp extends StatelessWidget {
     return  GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData.dark(),
+      theme: sharedPref.get('Mode')==null ? lightTheme : sharedPref.get('Mode')=='dark'? darkTheme :lightTheme,
       home:  HomePage(),
     );
   }

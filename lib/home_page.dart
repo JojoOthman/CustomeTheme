@@ -2,6 +2,8 @@ import 'package:custom_theme/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'main.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -20,10 +22,11 @@ class _HomePageState extends State<HomePage> {
 
               if(Get.isDarkMode){
                 Get.changeTheme(lightTheme);
+                sharedPref.setString('Mode', 'light');
 
               }else{
                 Get.changeTheme(darkTheme);
-
+                sharedPref.setString('Mode', 'dark');
               }
 
           },
